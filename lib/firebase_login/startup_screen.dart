@@ -5,6 +5,7 @@ import 'package:fluttermap/firebase_login/register_screen.dart';
 import 'package:fluttermap/firebase_login/singup_screen.dart';
 import 'package:fluttermap/home_screen.dart';
 import 'package:fluttermap/main_navbar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(const StartUp());
@@ -239,12 +240,14 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
     try {
       UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: _emailController.text,
-        password: _passwordController.text,
-      );
+        password: _passwordController.text);
+        SharedPreferences userlogged = await SharedPreferences.getInstance();
+      userlogged.setString("_emailController",_emailController.text);
+
       // Navigate to Home Page if login is successful
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomePage()),
+        MaterialPageRoute(builder: (context) => MainNavbar()),
       );
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Login Successful")),

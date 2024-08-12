@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttermap/home_screen.dart';
-import 'package:fluttermap/profile_screen.dart';
+import 'package:fluttermap/profile/profile_screen.dart';
 
 class MainNavbar extends StatefulWidget {
   const MainNavbar({super.key});
@@ -11,22 +11,42 @@ class MainNavbar extends StatefulWidget {
 
 class _MainNavbarState extends State<MainNavbar> with TickerProviderStateMixin {
   int _selectedIndex = 0;
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
-  List myScreens = [
+  final List<Widget> _screens = [
     const HomePage(),
-    const ProfileScreen()
+    const ProfilePage()
   ];
 
+  void _onItemTapped(int index) {
+    if (_selectedIndex != index) {
+      setState(() {
+        _selectedIndex = index;
+      });
+      _navigateToSelectedPage(index);
+    }
+  }
+
+  void _navigateToSelectedPage(int index) {
+    switch (index) {
+      case 0:
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const HomePage()),
+        );
+        break;
+      case 1:
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const ProfilePage()),
+        );
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: myScreens[_selectedIndex],
+      body: _screens[_selectedIndex],
       bottomNavigationBar: Container(
         margin: const EdgeInsets.symmetric(horizontal: 10),
         decoration: const BoxDecoration(
@@ -59,7 +79,3 @@ class _MainNavbarState extends State<MainNavbar> with TickerProviderStateMixin {
     );
   }
 }
-
-
-
-

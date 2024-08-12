@@ -7,7 +7,10 @@ import 'package:fluttermap/firebase_login/register_screen.dart';
 import 'package:fluttermap/firebase_login/singup_screen.dart';
 import 'package:fluttermap/firebase_login/startup_screen.dart';
 import 'package:fluttermap/firebase_options.dart';
-import 'package:fluttermap/profile_screen.dart';
+import 'package:fluttermap/profile/profile_screen.dart';
+import 'package:fluttermap/profile/splash_screen.dart';
+import 'package:fluttermap/update_profile_screen.dart';
+
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home:Admindashboard() ,
+      home:StartUp() ,
     );
   }
 }
