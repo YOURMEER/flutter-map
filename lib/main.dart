@@ -11,6 +11,8 @@ import 'package:fluttermap/profile/profile_screen.dart';
 import 'package:fluttermap/profile/splash_screen.dart';
 import 'package:fluttermap/update_profile_screen.dart';
 
+import 'about_screen.dart';
+
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +28,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home:StartUp() ,
+      home:AboutUsScreen() ,
     );
   }
 }
