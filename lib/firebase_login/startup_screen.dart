@@ -7,6 +7,8 @@ import 'package:fluttermap/home_screen.dart';
 import 'package:fluttermap/main_navbar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../admin/firstadmin_screen.dart';
+
 void main() {
   runApp(const StartUp());
 }
@@ -244,11 +246,23 @@ class _LoginScreenState extends State<LoginScreen> with TickerProviderStateMixin
         SharedPreferences userlogged = await SharedPreferences.getInstance();
       userlogged.setString("_emailController",_emailController.text);
 
-      // Navigate to Home Page if login is successful
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => MainNavbar()),
-      );
+
+      // Role-based navigation
+      if (_emailController.text == 'warda@gmail.com') {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => AdminDashboard()),
+        );
+      } else {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => MainNavbar()),
+        );
+      }
+
+
+
+
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Login Successful")),
       );
